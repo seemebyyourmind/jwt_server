@@ -1,6 +1,7 @@
 import express from "express";
-import configViewEngine from "./configs/viewEngine";
+import configViewEngine from "./config/viewEngine";
 import initWebRoutes from "./routers/web";
+import connection from "./config/configDB";
 require("dotenv").config();
 
 const app = express();
@@ -8,7 +9,7 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// simple query
+connection();
 
 app.use(express.urlencoded({ extended: true }));
 configViewEngine(app);

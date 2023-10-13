@@ -13,10 +13,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
-    <div class="user-infor-container-">
-      <form method="post" action="/user/create-user">
-        <div class="container">
-          <div class="row">
+    <div class="container">
+      <ul>
+        
+    </ul>
+
+      <div class="row">
+        <div class="user-infor-container-">
+          <form method="post" action="/user/create-user">
+            <div class="mb-3 mt-3"><h1>Create new User</h1></div>
+
             <div class="mb-3 col-6">
               <label for="Email" class="form-label">Email address</label>
               <input
@@ -52,9 +58,42 @@
             <div>
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>
-          </div>
+          </form>
         </div>
-      </form>
+
+        <div class="table-users mt-3">
+          <h1>table user</h1>
+          <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <th scope="col">Username</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <% userList && userList.forEach(function(item,index){ %>
+                <tr> 
+                  <th scope="row"><%=index+1%></th>
+                  <td><%=item.email%></td>
+                  <td><%=item.username%></td>
+                  <td>  
+                   <a href="/update?id=<%= item.id %>" class="btn btn-warning">Edit</button></a>
+                   
+                    
+                    <form style="display: inline;" action="/delete/<%=item.id%>" method="post"> <button type="submit" class="btn btn-danger">Delete</button></form>
+                 </td>
+                  </td> </tr>
+                
+            <% }) %> 
+              
+             
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </body>
 </html>
